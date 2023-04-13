@@ -1,0 +1,12 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: black;
+    color: yellow;
+    padding: 2rem;
+}
+input {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}

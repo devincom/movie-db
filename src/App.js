@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { useState } from 'react'
+import { Navbar, MovieContainer } from './components'
 
-function App() {
+const URL = "https://www.omdbapi.com/";
+// api key : 688eff80
+//Start : https://www.omdbapi.com/?s=Shiva&apikey=688eff80
+
+
+export default function App() {
+  const [movie, setMovie] = useState();
+  const [movieList, setMovieList] = useState([]);
+
+  const searchMovie = async (e) => {
+    if (e.code == 'Enter') {
+      const fetchURL = URL + `?s=${movie}` + "&apikey=688eff80";
+            const res = await fetch(fetchURL);
+            res.json().then(data => {
+                setMovieList(data.Search);
+            })
+    }
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>      
+    <Navbar setMovie= {setMovie} searchMovie = {searchMovie}/>
+    <MovieContainer movieList = {movieList}/>
+    </>
+  )
 }
-
-export default App;
